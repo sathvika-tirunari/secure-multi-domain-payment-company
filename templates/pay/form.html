@@ -1,0 +1,9 @@
+{% extends "base.html" %}{% block title %}Mock payment{% endblock %}{% block content %}
+<div class="card" style="max-width:520px;margin:auto"><h1>Mock payment</h1>
+<p><strong>Simulation only.</strong> Balance: {{ money(user.balance_cents) }}. No card or bank details are requested.</p>
+<form method="post"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+<label for="merchant">Merchant</label><select id="merchant" name="merchant">{% for m in cfg.MERCHANTS %}<option>{{ m }}</option>{% endfor %}</select>
+<label for="method">Method</label><select id="method" name="method">{% for m in cfg.METHODS %}<option>{{ m }}</option>{% endfor %}</select>
+<label for="amount">Amount (e.g. 12.50)</label><input id="amount" name="amount" inputmode="decimal" required>
+<label for="note">Note (optional, max 100)</label><input id="note" name="note" maxlength="100">
+<button class="primary" type="submit">Submit simulated payment</button></form></div>{% endblock %}

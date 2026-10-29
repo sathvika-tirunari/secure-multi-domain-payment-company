@@ -1,0 +1,4 @@
+{% extends "base.html" %}{% block content %}
+<div class="card"><h1>Welcome to PayCo</h1><p>A fictional payment company used to teach secure web design. Nothing here moves real money.</p>
+<p><a href="{{ url_for('portal.register') }}">Create a demo account</a> to try the customer portal and the mock payment app.</p>
+<p><small>API health check: <a href="{{ url_for('api.health') }}">/api/health</a></small></p></div>{% endblock %}

@@ -1,0 +1,7 @@
+{% extends "base.html" %}{% block title %}Portal{% endblock %}{% block content %}
+<div class="card"><h1>Hello, {{ user.username }}</h1><p>Demo wallet balance: <strong>{{ money(user.balance_cents) }}</strong> (fictional)</p>
+<p><a href="{{ url_for('pay.new_payment') }}">Make a simulated payment</a></p>
+<h2>Recent transactions</h2>
+{% if txs %}<table><tr><th>Ref</th><th>Merchant</th><th>Amount</th><th>Status</th></tr>
+{% for t in txs %}<tr><td>{{ t.ref }}</td><td>{{ t.merchant }}</td><td>{{ money(t.amount_cents) }}</td><td><span class="tag">{{ t.status }}</span></td></tr>{% endfor %}</table>
+{% else %}<p>No transactions yet.</p>{% endif %}</div>{% endblock %}

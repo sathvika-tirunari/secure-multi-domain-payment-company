@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}PayCo Demo{% endblock %}</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"></head>
+<body>
+<div class="banner">EDUCATIONAL DEMO: fictional company, SIMULATED payments only. Never enter real card or bank details.</div>
+<nav><span class="brand">PayCo (fictional)</span>
+<a href="{{ url_for('site.home') }}">Home</a><a href="{{ url_for('site.about') }}">About</a>
+{% if session.get('user_id') %}<a href="{{ url_for('portal.dashboard') }}">Portal</a><a href="{{ url_for('pay.new_payment') }}">Pay</a><a href="{{ url_for('admin.dashboard') }}">Admin</a>
+<form method="post" action="{{ url_for('portal.logout') }}" style="margin:0"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button type="submit">Log out</button></form>
+{% else %}<a href="{{ url_for('portal.login') }}">Log in</a><a href="{{ url_for('portal.register') }}">Register</a>{% endif %}</nav>
+<main>{% with messages = get_flashed_messages(with_categories=true) %}{% for cat, m in messages %}<div class="msg {{ cat }}">{{ m }}</div>{% endfor %}{% endwith %}
+{% block content %}{% endblock %}</main></body></html>
